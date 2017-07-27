@@ -1,4 +1,4 @@
-__all__ = ["hann_dft", "anaylsis"]
+__all__ = ["FilteredDFT", "FilteredWaveDFT", "SpectralAnalysis"]
 
 from .hann_dft import FilteredDFT, FilteredWaveDFT
 from .analysis import SpectralAnalysis
