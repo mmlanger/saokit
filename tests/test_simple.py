@@ -21,6 +21,7 @@ def test_cos_signal():
 
     assert abs(abs(result) - omega) < 1e-12
 
+
 def test_freq_diff():
     omega = 1.4
     time_step = 0.1
