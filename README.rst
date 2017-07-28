@@ -22,7 +22,6 @@ Installing
 ::
 
    $ git clone https://github.com/mmlanger/saodft.git
-   $ python setup.py build_ext --inplace
    $ python setup.py install
 
 Documentation
