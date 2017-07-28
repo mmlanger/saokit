@@ -1,7 +1,6 @@
 
 import numpy as np
 
-import saokit.saodft
 from saokit.saodft import SpectralAnalysis
 
 def test_success():

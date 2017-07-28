@@ -5,6 +5,10 @@ from scipy.optimize import brentq
 from .hann_dft import FilteredDFT, FilteredWaveDFT
 
 
+class SolverError(Exception):
+    pass
+
+
 class FrequencyEquation:
     def __init__(self, wave_dft, k, coeff_ratio):
         self.wave_dft = wave_dft
@@ -53,9 +57,10 @@ class SpectralAnalysis:
         try:
             omega = brentq(equation, om_min, om_max, xtol=solver_xtol)
         except ValueError:
-            print(
-                "Warning: solver failed for p={}, using fallback solver".format(
-                    p))
+            if self.p > 1:
+                raise SolverError
+            msg = "Warning: solver failed for p={}, using fallback solver"
+            print(msg.format(self.p))
             return self.fallback_solver(return_k, solver_xtol)
 
         if return_k:
@@ -76,7 +81,10 @@ class SpectralAnalysis:
         wave_dft = FilteredWaveDFT(self.data_dft.N, self.data_dft.T, 1)
         equation = FrequencyEquation(wave_dft, k, ratio)
 
-        omega = brentq(equation, om_min, om_max, xtol=solver_xtol)
+        try:
+            omega = brentq(equation, om_min, om_max, xtol=solver_xtol)
+        except ValueError:
+            raise SolverError
 
         if return_k:
             return omega, k
