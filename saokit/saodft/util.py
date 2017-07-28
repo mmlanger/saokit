@@ -1,7 +1,7 @@
 
 import numpy as np
 
-from .analysis import SpectralAnalysis, SolverError
+from .analysis import SpectralAnalysis
 
 
 def freq_diff(signal, p=4, dt=1.0, return_freq=False):
