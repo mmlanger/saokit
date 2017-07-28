@@ -1,3 +1,6 @@
+
+from math import factorial
+
 import numpy as np
 
 from numpy.fft import fftfreq
@@ -12,14 +15,14 @@ class FilteredWaveDFT:
         self.T = T
         self.p = p
 
-        self.prefac = factorial(p, exact=True)**2 / factorial(2*p, exact=True)
-        self.binom_coeffs = np.array([(-1)**l * binom(2*p, l+p)
-                                      for l in range(p+1)])
+        self.prefac = factorial(self.p)**2 / factorial(2*self.p)
+        self.binom_coeffs = np.array([(-1)**l * binom(2*self.p, l+self.p)
+                                      for l in range(self.p+1)])
 
     def fourier_coeff(self, omega, k):
-        theta = omega * self.T - 2 * k * np.pi
-        return (np.exp(-1j * theta) - 1) / (
-            np.exp(-1j * theta / self.N) - 1) / self.N
+        theta = omega*self.T - 2*k*np.pi
+        dft_coeff = (np.exp(-1j*theta) - 1) / (np.exp(-1j*theta/self.N) - 1)
+        return dft_coeff / self.N
 
     def filtered_coeff(self, omega, k):
         freq_coeff = self.binom_coeffs[0] * self.fourier_coeff(omega, k)
@@ -32,23 +35,23 @@ class FilteredWaveDFT:
 
 
 class FilteredDFT:
-    def __init__(self, signal, delta_t=1.0, p=4):
-        self.delta_t = delta_t
+    def __init__(self, signal, dt=1.0, p=4):
+        self.dt = dt
+        self.p = p
         self.signal = np.array(signal)
 
         self.N = self.signal.size
-        self.T = self.delta_t * self.N
+        self.T = self.dt * self.N
 
-        prefac = factorial(p, exact=True) ** 2 / factorial(2 * p, exact=True)
-        binom_coeffs = np.array(
-            [(-1) ** l * binom(2 * p, l + p) for l in range(p + 1)])
+        prefac = factorial(p)**2 / factorial(2*self.p)
+        binom_coeffs = np.array([(-1)**l * binom(2*self.p, l+self.p)
+                                 for l in range(self.p+1)])
 
-        self.p = p
-        self.freqs = 2 * np.pi * fftfreq(self.N, self.delta_t)
+        self.freqs = 2 * np.pi * fftfreq(self.N, self.dt)
         self.dft = fft(self.signal) / self.N
 
         self.filtered_dft = binom_coeffs[0] * self.dft
-        for l in range(1, self.p + 1):
+        for l in range(1, self.p+1):
             shifted_coeffs = np.roll(self.dft, -l) + np.roll(self.dft, +l)
             self.filtered_dft += binom_coeffs[l] * shifted_coeffs
 

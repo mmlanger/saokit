@@ -16,9 +16,6 @@ class FrequencyEquation:
         self.coeff_ratio = coeff_ratio
 
     def __call__(self, omega):
-        # analytic_ratio = (np.abs(self.wave_dft.filtered_coeff(omega, self.k-1)) /
-        #                  np.abs(self.wave_dft.filtered_coeff(omega, self.k)))
-
         numer = (abs(self.wave_dft.filtered_coeff(omega, self.k)) +
                  abs(self.wave_dft.filtered_coeff(omega, self.k-1)))
         denom = (abs(self.wave_dft.filtered_coeff(omega, self.k)) +
@@ -29,20 +26,17 @@ class FrequencyEquation:
 
 
 class SpectralAnalysis:
-    def __init__(self, signal, p=4, delta_t=1.0):
-        # if signal.size < 1000:
-        #    p = 1
-
+    def __init__(self, signal, p=4, dt=1.0):
         self.signal = signal
         self.p = p
-        self.delta_t = delta_t
+        self.dt = dt
 
-        self.data_dft = FilteredDFT(self.signal, self.delta_t, self.p)
+        self.data_dft = FilteredDFT(self.signal, self.dt, self.p)
         self.wave_dft = FilteredWaveDFT(self.data_dft.N, self.data_dft.T,
                                         self.p)
 
     def reset(self):
-        self.data_dft = FilteredDFT(self.signal, self.delta_t, self.p)
+        self.data_dft = FilteredDFT(self.signal, self.dt, self.p)
         self.wave_dft = FilteredWaveDFT(self.data_dft.N, self.data_dft.T,
                                         self.p)
 
@@ -123,7 +117,6 @@ class SpectralAnalysis:
         coeffs[::-1][:self.p + 1] = 0.0
 
         k = coeffs.argmax()
-        # ratio = coeffs[k-1] / coeffs[k]
         ratio = (coeffs[k] + coeffs[k - 1]) / (coeffs[k] + coeffs[k + 1])
 
         return k, ratio

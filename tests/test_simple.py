@@ -9,13 +9,13 @@ def test_success():
 
 def test_trivial():
     omega = 2.1234
-    dt = 0.1
+    time_step = 0.1
     n = 800
 
-    t = np.arange(0, n*dt, dt)
+    t = np.arange(0, n*time_step + 0.5*time_step, time_step)
     y = np.cos(omega * t)
 
-    analysis = SpectralAnalysis(y, p=4, delta_t=dt)
+    analysis = SpectralAnalysis(y, p=4, dt=time_step)
     result = analysis.compute_frequency()
 
 
