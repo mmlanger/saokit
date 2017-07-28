@@ -51,7 +51,7 @@ class SpectralAnalysis:
         try:
             omega = brentq(equation, om_min, om_max, xtol=solver_xtol)
         except ValueError:
-            if self.p > 1:
+            if self.p == 1:
                 raise SolverError
             msg = "Warning: solver failed for p={}, using fallback solver"
             print(msg.format(self.p))
