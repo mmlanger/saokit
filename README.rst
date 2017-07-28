@@ -2,8 +2,8 @@
 saodft
 ******
 
-An efficient algorithm for numerical analysis of fundamental frequencies
-########################################################################
+Efficient algorithms for numerical analysis of fundamental frequencies
+######################################################################
 
 TODO Description
 
