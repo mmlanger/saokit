@@ -6,8 +6,7 @@ cache:
   directories:
     - $HOME/.ccache
 
-install:
-  - pip install numpy scipy tox
+install: pip install tox
 
 script: tox
 
