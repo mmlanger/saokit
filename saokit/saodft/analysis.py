@@ -65,6 +65,8 @@ class SpectralAnalysis:
     def fallback_solver(self, return_k=False, solver_xtol=5e-16):
         dft = self.data_dft.dft
         coeffs = np.abs(dft - (np.roll(dft, -1) + np.roll(dft, 1)) / 2)
+        coeffs[:2] = 0.0
+        coeffs[::-1][:2] = 0.0
         k = coeffs.argmax()
 
         limit_shift = 1e-14
