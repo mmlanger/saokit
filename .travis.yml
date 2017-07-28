@@ -1,10 +1,12 @@
+# After changing this file, check it on:
+#   http://lint.travis-ci.org/
 language: python
 
+# Run jobs on container-based infrastructure, can be overridden per job
 sudo: false
+
 cache:
   pip: true
-  directories:
-    - $HOME/.ccache
 
 install: pip install tox
 
@@ -12,3 +14,8 @@ script: tox
 
 notifications:
   email: false
+
+python:
+  - 3.4
+  - 3.5
+  - 3.6
