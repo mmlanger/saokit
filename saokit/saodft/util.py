@@ -4,7 +4,7 @@ import numpy as np
 from .analysis import SpectralAnalysis
 
 
-def freq_diff(signal, p=4, dt=1.0, return_freq=False):
+def freq_diff(signal, p=3, dt=1.0, return_freq=False):
     signal_arr = np.array(signal)
     half_n = signal_arr.size // 2
 

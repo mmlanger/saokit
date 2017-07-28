@@ -26,7 +26,7 @@ class FrequencyEquation:
 
 
 class SpectralAnalysis:
-    def __init__(self, signal, p=4, dt=1.0):
+    def __init__(self, signal, p=3, dt=1.0):
         self.signal = signal
         self.p = p
         self.dt = dt
