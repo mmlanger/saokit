@@ -5,7 +5,6 @@ import numpy as np
 
 from numpy.fft import fftfreq
 from scipy.fftpack import fft
-from scipy.misc import factorial
 from scipy.special import binom
 
 
