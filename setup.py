@@ -24,7 +24,7 @@ setup(
     version='0.0.1.dev1',
 
     description=(
-        'Efficient and precise algorithms for numerical' 
+        'Efficient and precise algorithms for numerical'
         'analysis of fundamental frequencies'
     ),
     long_description=long_description,
