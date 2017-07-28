@@ -17,9 +17,9 @@ class FrequencyEquation:
 
     def __call__(self, omega):
         numer = (abs(self.wave_dft.filtered_coeff(omega, self.k)) +
-                 abs(self.wave_dft.filtered_coeff(omega, self.k-1)))
+                 abs(self.wave_dft.filtered_coeff(omega, self.k - 1)))
         denom = (abs(self.wave_dft.filtered_coeff(omega, self.k)) +
-                 abs(self.wave_dft.filtered_coeff(omega, self.k+1)))
+                 abs(self.wave_dft.filtered_coeff(omega, self.k + 1)))
         analytic_ratio = numer / denom
 
         return analytic_ratio - self.coeff_ratio
@@ -98,10 +98,11 @@ class SpectralAnalysis:
                                            filtered_wave_dft[0]).conj()
 
         amplitude = self.data_dft.filtered_dft[k] / filtered_wave_dft[k]
-        amplitude_conj = self.data_dft.filtered_dft[-k] / \
-                         filtered_wave_dft_conj[-k]
+        amplitude_conj = (self.data_dft.filtered_dft[-k] /
+                          filtered_wave_dft_conj[-k])
 
-        self.data_dft.dft -= amplitude * wave_dft + amplitude_conj * wave_dft_conj
+        self.data_dft.dft -= (amplitude * wave_dft +
+                              amplitude_conj * wave_dft_conj)
         self.data_dft.filtered_dft -= (amplitude * filtered_wave_dft +
                                        amplitude_conj * filtered_wave_dft_conj)
 
