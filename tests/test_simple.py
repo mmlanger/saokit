@@ -3,6 +3,7 @@ import numpy as np
 
 from saokit.saodft import SpectralAnalysis
 
+
 def test_success():
     assert True
 
@@ -17,6 +18,5 @@ def test_trivial():
 
     analysis = SpectralAnalysis(y, p=4, dt=time_step)
     result = analysis.compute_frequency()
-
 
     assert abs(abs(result) - omega) < 1e-12
