@@ -21,7 +21,7 @@ Installing
 
 ::
 
-   $ git clone https://github.com/mmlanger/saodft.git
+   $ git clone https://github.com/mmlanger/saokit.git
    $ python setup.py install
 
 Documentation
