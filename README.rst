@@ -22,6 +22,7 @@ Installing
 ::
 
    $ git clone https://github.com/mmlanger/saokit.git
+   $ cd saokit
    $ python setup.py install
 
 Documentation
