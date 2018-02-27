@@ -16,7 +16,5 @@ notifications:
   email: false
 
 python:
-  - 3.4
-  - 3.5
   - 3.6
 # - 3.7  # Planned: 2018-06
